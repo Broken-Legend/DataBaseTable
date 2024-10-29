@@ -143,7 +143,6 @@ export default function BasicTable() {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="caption table">
-        <caption>Information Text about selected row</caption>
         <TableHead>
           <TableRow>
             <TableCell>Select</TableCell>
@@ -288,3 +287,6 @@ export default function BasicTable() {
     </TableContainer>
   );
 }
+// TESTING GITHUB
+//testing 2
+//test 3 very important
