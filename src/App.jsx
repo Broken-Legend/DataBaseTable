@@ -1,22 +1,26 @@
-/* import * as React from "react";
+// TESTING GITHUB
+import * as React from "react";
+import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
-import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 
-export default function BasicTable() {
-  const [selected, setSelected] = React.useState([]);
+export default function SingleSelectTable() {
+  const [selected, setSelected] = React.useState(null); // Single selection state
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [meusDados, setMeusDados] = React.useState([]);
   const [familiaEmms, setFamiliaEmms] = React.useState([]);
   const [marca, setMarca] = React.useState([]);
@@ -140,208 +144,8 @@ export default function BasicTable() {
     fetchOperador();
   }, []);
 
-  return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="caption table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Select</TableCell>
-            <TableCell>
-              <Box
-                align="left"
-                component="form"
-                sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
-                noValidate
-                autoComplete="off"
-              >
-                <TextField
-                  id="outlined-basic"
-                  label="CodigoInterno"
-                  variant="outlined"
-                  onChange={handleChangeCode}
-                />
-              </Box>
-            </TableCell>
-            <TableCell>
-              <Box
-                component="form"
-                sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
-                noValidate
-                autoComplete="off"
-              >
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    FamiliaEmms
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={valueChosenFamilia}
-                    label="FamiliaEmms"
-                    key="FamiliaEmms"
-                    name="valueChosenFamilia"
-                    onChange={handleChangeFamilia}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    {familiaEmms.map((row) => (
-                      <MenuItem key={row.ID} value={row.FamiliaEmms}>
-                        {row.FamiliaEmms}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-            </TableCell>
-            <TableCell>
-              <Box
-                component="form"
-                sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
-                noValidate
-                autoComplete="off"
-              >
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Marca</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    name="valueChosenMarca"
-                    value={valueChosenMarca}
-                    label="Marca"
-                    key="Marca"
-                    onChange={handleChangeMarca}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    {marca.map((row) => (
-                      <MenuItem key={row.ID} value={row.Marca}>
-                        {row.Marca}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-            </TableCell>
-            <TableCell>NSerie</TableCell>
-            <TableCell>
-              <Box
-                component="form"
-                sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
-                noValidate
-                autoComplete="off"
-              >
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    Operador
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    name="valueChosenOperador"
-                    value={valueChosenOperador}
-                    label="Operador"
-                    key="Operador"
-                    onChange={handleChangeOp}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    {operador.map((row) => (
-                      <MenuItem key={row.ID} value={row.Operador}>
-                        {row.Operador}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {meusDados.map((row) => {
-            const isItemSelected = selected.includes(row.id);
-            return (
-              <TableRow
-                key={row.ID}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <Checkbox
-                  color="primary"
-                  checked={isItemSelected}
-                onChange={onSelectClick}
-                />
-                <TableCell component="th" scope="row">
-                  {row.CodigoInterno}
-                </TableCell>
-                <TableCell>{row.Designacao}</TableCell>
-                <TableCell>{row.Marca}</TableCell>
-                <TableCell>{row.NSerie}</TableCell>
-                <TableCell>{row.Operador}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-} */
-// TESTING GITHUB
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-
-function createData(id, name, calories, fat, carbs, protein) {
-  return { id, name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(1, "Cupcake", 305, 3.7, 67, 4.3),
-  createData(2, "Donut", 452, 25.0, 51, 4.9),
-  createData(3, "Eclair", 262, 16.0, 24, 6.0),
-  createData(4, "Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData(5, "Gingerbread", 356, 16.0, 49, 3.9),
-];
-
-const headCells = [
-  { id: "name", label: "Dessert (100g serving)" },
-  { id: "calories", label: "Calories" },
-  { id: "fat", label: "Fat (g)" },
-  { id: "carbs", label: "Carbs (g)" },
-  { id: "protein", label: "Protein (g)" },
-];
-
-export default function BasicTable() {
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
   const handleClick = (event, id) => {
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-    setSelected(newSelected);
+    setSelected(selected === id ? null : id); // Select or deselect the clicked row
   };
 
   const handleChangePage = (event, newPage) => setPage(newPage);
@@ -352,8 +156,8 @@ export default function BasicTable() {
   };
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-  const visibleRows = rows.slice(
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - meusDados.length) : 0;
+  const visibleRows = meusDados.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
@@ -362,23 +166,133 @@ export default function BasicTable() {
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
-          <Table sx={{ minWidth: 750 }} aria-label="simple table">
+          <Table sx={{ minWidth: 750 }} aria-label="single select table">
             <TableHead>
               <TableRow>
-                <TableCell padding="checkbox" />
-                {headCells.map((headCell) => (
-                  <TableCell key={headCell.id}>{headCell.label}</TableCell>
-                ))}
+                <TableCell>Select</TableCell>
+                <TableCell>
+                  <Box
+                    align="left"
+                    component="form"
+                    sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+                    noValidate
+                    autoComplete="off"
+                  >
+                    <TextField
+                      id="outlined-basic"
+                      label="CodigoInterno"
+                      variant="outlined"
+                      onChange={handleChangeCode}
+                    />
+                  </Box>
+                </TableCell>
+                <TableCell>
+                  <Box
+                    component="form"
+                    sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+                    noValidate
+                    autoComplete="off"
+                  >
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        FamiliaEmms
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={valueChosenFamilia}
+                        label="FamiliaEmms"
+                        key="FamiliaEmms"
+                        name="valueChosenFamilia"
+                        onChange={handleChangeFamilia}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        {familiaEmms.map((row) => (
+                          <MenuItem key={row.ID} value={row.FamiliaEmms}>
+                            {row.FamiliaEmms}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </TableCell>
+                <TableCell>
+                  <Box
+                    component="form"
+                    sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+                    noValidate
+                    autoComplete="off"
+                  >
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Marca
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        name="valueChosenMarca"
+                        value={valueChosenMarca}
+                        label="Marca"
+                        key="Marca"
+                        onChange={handleChangeMarca}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        {marca.map((row) => (
+                          <MenuItem key={row.ID} value={row.Marca}>
+                            {row.Marca}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </TableCell>
+                <TableCell>NSerie</TableCell>
+                <TableCell>
+                  <Box
+                    component="form"
+                    sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+                    noValidate
+                    autoComplete="off"
+                  >
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Operador
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        name="valueChosenOperador"
+                        value={valueChosenOperador}
+                        label="Operador"
+                        key="Operador"
+                        onChange={handleChangeOp}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        {operador.map((row) => (
+                          <MenuItem key={row.ID} value={row.Operador}>
+                            {row.Operador}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = selected.includes(row.id);
+                const isItemSelected = selected === row.ID; // Only one selected
 
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.id)}
+                    onClick={(event) => handleClick(event, row.ID)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
@@ -390,12 +304,12 @@ export default function BasicTable() {
                       <Checkbox checked={isItemSelected} color="primary" />
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {row.name}
+                      {row.CodigoInterno}
                     </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell align="right">{row.carbs}</TableCell>
-                    <TableCell align="right">{row.protein}</TableCell>
+                    <TableCell>{row.Designacao}</TableCell>
+                    <TableCell>{row.Marca}</TableCell>
+                    <TableCell>{row.NSerie}</TableCell>
+                    <TableCell>{row.Operador}</TableCell>
                   </TableRow>
                 );
               })}
@@ -410,7 +324,7 @@ export default function BasicTable() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={meusDados.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
