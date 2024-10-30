@@ -18,7 +18,7 @@ import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 
-export default function SingleSelectTable() {
+export default function SingleSelectDatabaseTable() {
   const [selected, setSelected] = React.useState(null); // Single selection state
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -35,7 +35,7 @@ export default function SingleSelectTable() {
   const handleChangeOp = async (event) => {
     console.log(event.target.value);
     setValueChosenOperador(event.target.value);
-    // Send the selected value to the backend using axios
+    // Send the selected event value to the backend using axios
     const tableResult = await axios.get(
       `http://localhost:3000/data?Operador=${event.target.value}&FamiliaEmms=${valueChosenFamilia}&Marca=${valueChosenMarca}`
     );
