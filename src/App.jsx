@@ -1,4 +1,6 @@
 import * as React from "react";
+import AppDataInfo from "./AppDataInfo.jsx";
+import AppAccordion from "./AppAccordion.jsx";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -24,6 +26,7 @@ export default function SingleSelectTable() {
   const [familiaEmms, setFamiliaEmms] = React.useState([]);
   const [marca, setMarca] = React.useState([]);
   const [operador, setOperador] = React.useState([]);
+  const [currentID, setCurrentID] = React.useState();
   const [valueChosenFamilia, setValueChosenFamilia] = React.useState("");
   const [valueChosenMarca, setValueChosenMarca] = React.useState("");
   const [valueChosenOperador, setValueChosenOperador] = React.useState("");
@@ -143,8 +146,11 @@ export default function SingleSelectTable() {
     fetchOperador();
   }, []);
 
-  const handleClick = (event, id) => {
-    setSelected(selected === id ? null : id); // Select or deselect the clicked row
+  const handleClick = async (event, ID) => {
+    setSelected(selected === ID ? null : ID); // Select or deselect the clicked row
+    const selectResult = await axios.get(`http://localhost:3000/ID?id=${ID}`);
+    setCurrentID(ID);
+    console.log(ID);
   };
 
   const handleChangePage = (event, newPage) => setPage(newPage);
@@ -201,15 +207,17 @@ export default function SingleSelectTable() {
                         id="demo-simple-select"
                         value={valueChosenFamilia}
                         label="FamiliaEmms"
-                        key="FamiliaEmms"
                         name="valueChosenFamilia"
                         onChange={handleChangeFamilia}
                       >
                         <MenuItem value="">
                           <em>None</em>
                         </MenuItem>
-                        {familiaEmms.map((row) => (
-                          <MenuItem key={row.ID} value={row.FamiliaEmms}>
+                        {familiaEmms.map((row, index) => (
+                          <MenuItem
+                            key={`${row.ID}-${index}`}
+                            value={row.FamiliaEmms}
+                          >
                             {row.FamiliaEmms}
                           </MenuItem>
                         ))}
@@ -234,14 +242,16 @@ export default function SingleSelectTable() {
                         name="valueChosenMarca"
                         value={valueChosenMarca}
                         label="Marca"
-                        key="Marca"
                         onChange={handleChangeMarca}
                       >
                         <MenuItem value="">
                           <em>None</em>
                         </MenuItem>
-                        {marca.map((row) => (
-                          <MenuItem key={row.ID} value={row.Marca}>
+                        {marca.map((row, index) => (
+                          <MenuItem
+                            key={`${row.ID}-${index}`}
+                            value={row.Marca}
+                          >
                             {row.Marca}
                           </MenuItem>
                         ))}
@@ -267,14 +277,16 @@ export default function SingleSelectTable() {
                         name="valueChosenOperador"
                         value={valueChosenOperador}
                         label="Operador"
-                        key="Operador"
                         onChange={handleChangeOp}
                       >
                         <MenuItem value="">
                           <em>None</em>
                         </MenuItem>
-                        {operador.map((row) => (
-                          <MenuItem key={row.ID} value={row.Operador}>
+                        {operador.map((row, index) => (
+                          <MenuItem
+                            key={`${row.ID}-${index}`}
+                            value={row.Operador}
+                          >
                             {row.Operador}
                           </MenuItem>
                         ))}
@@ -295,7 +307,7 @@ export default function SingleSelectTable() {
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.id}
+                    key={row.ID}
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >
@@ -330,6 +342,8 @@ export default function SingleSelectTable() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
+      <AppDataInfo id={currentID} />
+      <AppAccordion />
     </Box>
   );
 }
